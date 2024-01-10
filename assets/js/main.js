@@ -94,11 +94,13 @@ const completedObject = (e) => {
     let ArrPos = 0
     toDo.forEach(el => {
         // console.log("ID: ", el.id, "Target-ID: ", e.target.id);
-        if (`check${el.id}` == e.target.id) {
-            console.log("Startarray",toDo);
-            console.log("Abfrage erfolgreich");
-            ArrPos = el.id
-            console.log("Array-Pos: ", el.id);
+        for (let i = 0; i < toDo.length; i++) {
+            if (`check${i}` == e.target.id) {
+                console.log("Startarray", toDo);
+                console.log("Abfrage erfolgreich");
+                ArrPos = i
+                console.log("Array-Pos: ", el.id);
+            }
         }
     });
     toDo.splice(ArrPos, 1)
