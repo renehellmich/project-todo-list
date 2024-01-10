@@ -62,13 +62,11 @@ function addToDo() {
 }
 
 const deleteObject = (e) => {
-    const bool = confirm("Soll dieses Object wirklich gelöscht werden?")
-    // console.log(e.target, toDo);
-    const ArrPos = toDo.findIndex(e => e.checked === true)
-    console.log("ArrPos: ", ArrPos);
-    if (bool == true) {
+    const posChecked = e.target.parentElement.childNodes[1].checked
+    console.log(posChecked);
+    if (posChecked === true) {
         const parent = document.querySelector(`#${e.target.id}`).parentElement
-        console.log(bool, e.target.id, parent.id);
+        console.log(e.target.id, parent.id);
 
         // node Definition
         const divParent = document.querySelector("#formList").children
@@ -78,9 +76,25 @@ const deleteObject = (e) => {
         console.log(child);
         const remove = divParent[0].removeChild(child)
         // function zum Löschen des Objects und Position in Array
-
     } else {
-        console.log(bool);
+        const bool = confirm("Soll dieses Object wirklich gelöscht werden?")
+        // console.log(e.target, toDo);
+        const ArrPos = toDo.findIndex(e => e.checked === true)
+        console.log("ArrPos: ", ArrPos);
+        if (bool == true) {
+            const parent = document.querySelector(`#${e.target.id}`).parentElement
+            console.log(bool, e.target.id, parent.id);
+
+            // node Definition
+            const divParent = document.querySelector("#formList").children
+            console.log(divParent);
+
+            const child = document.getElementById(`${parent.id}`)
+            console.log(child);
+            const remove = divParent[0].removeChild(child)
+            // function zum Löschen des Objects und Position in Array
+
+        }
     }
 }
 
