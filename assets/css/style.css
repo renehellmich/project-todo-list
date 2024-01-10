@@ -5,6 +5,11 @@
     align-items: center;
 }
 
+#inputString {
+    width: 240px;
+    /* text-decoration: line-through; */
+}
+
 .deleteDo {
     align-self: flex-end;
 }

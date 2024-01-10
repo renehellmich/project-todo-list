@@ -24,44 +24,44 @@ const newDiv = document.createElement("div")
 // functions
 
 function addToDo() {
-    const getDo = Object.create(newDo)
-    getDo.id = value
-    getDo.done = false
-    getDo.text = inputString.value
-    toDo.push(getDo)
-    value++
+    if (inputString.value != "") {
 
-    console.log(getDo, toDo);
-    // const innerDiv = document.getElementsByClassName("divCheckbox")
-    
-    list.innerHTML = "";
-    // const array = toDo.map(el => {
+        const getDo = Object.create(newDo)
+        getDo.id = value
+        getDo.done = false
+        getDo.text = inputString.value
+
+        toDo.push(getDo)
+        value++
+
+        console.log(getDo, toDo);
+        // const innerDiv = document.getElementsByClassName("divCheckbox")
+
+        list.innerHTML = "";
+        // const array = toDo.map(el => {
         newDiv.innerHTML += `
         <div class='divCheckbox' id='div${getDo.id}'>
-        <input type='checkbox' name='check${getDo.text}' id='check${getDo.text}' class='checkBox'>
-        <label for='check${getDo.text}'>${getDo.text}</label>
+        <input type='checkbox' name='check${getDo.text}' id='check${getDo.id}' class='checkBox'>
+        <label for='check${getDo.text}' id='label${getDo.id}'>${getDo.text}</label>
         <p class='deleteDo' id='delete${getDo.id}'>❌</p>
         </div>
         `
-        
+
         // });
         list.appendChild(newDiv)
-        
+
+        toDo.forEach(el => {
+            addEventListenerToX(`${el.id}`)
+        });
         inputString.value = null;
-        addEventListenerToX(`${getDo.id}`)
-}
+    } else {
 
-const addEventListenerToX = (id) => {
-    
-    const obt = document.querySelector(`#delete${id}`)
-
-    obt.addEventListener("click", deleteObject)
-
+    }
 }
 
 const deleteObject = (e) => {
     const bool = confirm("Soll dieses Object wirklich gelöscht werden?")
-    if(bool == true) {
+    if (bool == true) {
         const parent = document.querySelector(`#${e.target.id}`).parentElement
         console.log(bool, e.target.id, parent.id);
 
@@ -79,4 +79,24 @@ const deleteObject = (e) => {
     }
 }
 
+const completedObject = (e) => {
+    const parent = document.querySelector(`#${e.target.id}`).parentElement
+    console.log(e.target.id, parent);
+
+    // node Definition
+    const childLabel = parent.childNodes[3]
+    // const child = document.querySelector(`#label${e.target.id}`)
+    console.log(childLabel);
+    childLabel.style.textDecoration = 'line-through';
+}
+
 // addEventListener()
+
+const addEventListenerToX = (id) => {
+
+    const obt = document.querySelector(`#delete${id}`)
+    const box = document.querySelector(`#check${id}`)
+
+    obt.addEventListener("click", deleteObject)
+    box.addEventListener("click", completedObject)
+}
