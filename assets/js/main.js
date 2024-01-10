@@ -14,7 +14,8 @@ let value = 0;
 let newDo = {
     id: null,
     text: null,
-    done: false
+    done: false,
+    checked: false
 }
 
 // Container Definition
@@ -29,6 +30,7 @@ function addToDo() {
         const getDo = Object.create(newDo)
         getDo.id = value
         getDo.done = false
+        getDo.checked = false
         getDo.text = inputString.value
 
         toDo.push(getDo)
@@ -88,6 +90,19 @@ const completedObject = (e) => {
     // const child = document.querySelector(`#label${e.target.id}`)
     console.log(childLabel);
     childLabel.style.textDecoration = 'line-through';
+
+    let ArrPos = 0
+    toDo.forEach(el => {
+        // console.log("ID: ", el.id, "Target-ID: ", e.target.id);
+        if (`check${el.id}` == e.target.id) {
+            console.log("Startarray",toDo);
+            console.log("Abfrage erfolgreich");
+            ArrPos = el.id
+            console.log("Array-Pos: ", el.id);
+        }
+    });
+    toDo.splice(ArrPos, 1)
+    console.log("Bereinigtes Array", toDo);
 }
 
 // addEventListener()
