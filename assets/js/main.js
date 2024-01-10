@@ -63,6 +63,9 @@ function addToDo() {
 
 const deleteObject = (e) => {
     const bool = confirm("Soll dieses Object wirklich gelöscht werden?")
+    // console.log(e.target, toDo);
+    const ArrPos = toDo.findIndex(e => e.checked === true)
+    console.log("ArrPos: ", ArrPos);
     if (bool == true) {
         const parent = document.querySelector(`#${e.target.id}`).parentElement
         console.log(bool, e.target.id, parent.id);
@@ -92,18 +95,17 @@ const completedObject = (e) => {
     childLabel.style.textDecoration = 'line-through';
 
     let ArrPos = 0
-    toDo.forEach(el => {
+    toDo.forEach((el, i) => {
         // console.log("ID: ", el.id, "Target-ID: ", e.target.id);
-        for (let i = 0; i < toDo.length; i++) {
-            if (`check${i}` == e.target.id) {
-                console.log("Startarray", toDo);
-                console.log("Abfrage erfolgreich");
-                ArrPos = i
-                console.log("Array-Pos: ", el.id);
-            }
+        if (`check${i}` == e.target.id) {
+            console.log("Abfrage erfolgreich");
+
+            toDo[i].checked = true;
+            ArrPos = i
+            // console.log("Array-Pos: ", el.id);
         }
     });
-    toDo.splice(ArrPos, 1)
+    // toDo.splice(ArrPos, 1)
     console.log("Bereinigtes Array", toDo);
 }
 
